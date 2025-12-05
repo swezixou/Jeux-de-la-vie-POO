@@ -116,6 +116,9 @@ Diff affiché en cas d’erreur ➝ ligne/colonne exacte.
 ▶️ Lancer
 ./bin/game_of_life
 
+<img width="769" height="145" alt="{59F68EAA-E93F-4E78-A587-1CD39BDD36B7}" src="https://github.com/user-attachments/assets/f0f4de4e-495f-49eb-9069-ffba03a3b29a" />
+
+
 🧹 Nettoyer
 
 <img width="628" height="56" alt="{4283F375-5C0B-45A4-89E2-1F75697E3840}" src="https://github.com/user-attachments/assets/cab4f109-16d7-4c49-b4eb-7ffc1ffeea48" />
