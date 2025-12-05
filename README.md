@@ -20,49 +20,40 @@ Mode graphique (SFML) : visualisation animée de la grille, HUD, interactions so
 
 Ce projet a été réalisé dans le cadre de l’UE Programmation Orientée Objet.
 
-🧱 Architecture générale du projet
+🧱 Architecture du projet
+include/
+│── application/   → Game, FileManager
+│── domain/        → Cell, DeadCell, AliveCell, Grid, Rule, ConwayRule
+│── presentation/  → Renderer, ConsoleRenderer, SFMLRenderer
 
-Le code est structuré selon une architecture en couches permettant une séparation claire des responsabilités :
+src/
+│── application/
+│── domain/
+│── presentation/
 
-PROJECT  
-│  
-├── application/       → Moteur du jeu (Game), gestion fichiers (FileManager)  
-├── domain/            → Logique métier : Cell, AliveCell, DeadCell, Rule, Grid  
-├── presentation/      → Rendu console et SFML (ConsoleRenderer, SFMLRenderer)  
-├── src/               → Implémentations .cpp  
-├── include/           → Fichiers .hpp  
-├── data/              → Textures, audio, fichiers initiaux  
-└── testuni/           → Tests unitaires
+data/
+│── textures/      → images pour le background
+│── audio/         → musique SFML
+│── test_cases/    → fichiers initiaux
 
+testuni/           → tests unitaires
 
-Cette organisation respecte pleinement le principe SRP (Single Responsibility Principle).
+main.cpp
+Makefile
 
-🧠 Principes SOLID appliqués
-✔ S — Single Responsibility
+🧠 Application complète des principes SOLID
 
-Chaque classe a une responsabilité unique :
+🎯 S – Single Responsibility
+Chaque classe fait une seule chose (Grid gère la grille, Renderer l’affichage, Rule les règles…).
 
-Grid gère les cellules
+🎯 O – Open / Closed
+On peut ajouter des règles (ex : HighLife), des types de cellules, ou même un autre moteur graphique sans toucher au code existant.
 
-Rule applique la règle d’évolution
+🎯 L – Liskov Substitution
+Toutes les classes héritées peuvent remplacer leur parent sans casser la logique.
 
-Renderer gère l’affichage
-
-Game orchestre la simulation
-
-FileManager lit/écrit les fichiers
-
-✔ O — Open / Closed
-
-Ajouter une règle (HighLifeRule) ou un renderer (SDLRenderer) ne nécessite aucune modification du code existant.
-
-✔ L — Liskov Substitution
-
-Toutes les classes dérivées (AliveCell, ConsoleRenderer, etc.) peuvent remplacer leur classe mère sans comportement inattendu.
-
-✔ I — Interface Segregation
-
-Interfaces minimales :
+🎯 I – Interface Segregation
+Interfaces fines :
 
 Cell → isAlive(), clone()
 
@@ -70,93 +61,102 @@ Rule → apply()
 
 Renderer → render(), handleEvents(), isOpen()
 
-✔ D — Dependency Inversion
+🎯 D – Dependency Inversion
+Game dépend de Renderer (abstraction), pas de SFML.
+Grid dépend de Rule, pas de ConwayRule.
 
-Les classes de haut niveau dépendent d’abstractions et non d’implémentations :
+Résultat : un code propre, modulable, extensible.
 
-Game utilise Renderer*
+🎨 Mode graphique (SFML)
+✔ Fonctionnalités
 
-Grid utilise Rule*
+Affichage complet des cellules
 
-🎨 Fonctionnalités du mode graphique (SFML)
+HUD dynamique : itération, pause, vitesse
 
-Affichage animé de la grille
+Fond animé (scrolling) + pixel art
 
-Fond animé (scrolling)
+Musique SFML (activée par défaut)
 
-HUD dynamique (vitesse, état pause, numéro d’itération)
+Clic souris pour modifier la grille :
 
-Musique de fond
+🖱️ Gauche → cellule vivante
 
-Clic gauche/droit pour créer ou supprimer une cellule
+🖱️ Droite → cellule morte
 
-Contrôles :
+✔ Contrôles clavier
+Touche	Action
+Espace	Pause / Play
+Entrée	Step-by-step
+→	Accélérer
+←	Ralentir
+M	Mute / Unmute musique
+Échap	Quitter
+🖥️ Mode console
 
-ESPACE → pause
+Charge un fichier ou génère une grille aléatoire
 
-Entrée → itération étape par étape
+Exécute N itérations
 
-Flèche droite → accélérer
+Exporte chaque génération dans un dossier :
 
-Flèche gauche → ralentir
+<nom_fichier>_out/
+
+
+Parfait pour les corrections automatiques.
 
 🧪 Tests unitaires
 
-Un système de test compare automatiquement :
+Les tests comparent :
 
-la grille obtenue après N itérations
-
-la grille attendue fournie dans un fichier .txt
+✔ la grille obtenue
+✔ la grille attendue (fichier .txt)
 
 Commande :
 
 make test
 
 
-Les résultats indiquent clairement si une différence existe (ligne, colonne).
+Diff affiché en cas d’erreur ➝ ligne/colonne exacte.
 
-▶️ Compilation & Exécution
-🔧 Compilation générale
+⚙️ Compilation & Exécution
+🔧 Compiler
 make
 
-🖥️ Lancer le programme
+▶️ Lancer
 ./bin/game_of_life
 
-
-L’utilisateur choisit ensuite :
-
-le mode (console / graphique)
-
-le type d’initialisation (fichier / aléatoire)
-
-le nombre d’itérations
-
-🔄 Nettoyer
+🧹 Nettoyer
 make clean
 
-📂 Exemples de fichiers d’entrée
+⚠️ Makefile : Linux & Windows
 
-Format :
+Dans le Makefile :
 
-5 10
-0 0 1 0 0 0 0 0 0 0
-0 0 0 1 0 0 0 0 0 0
-0 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0
+# Sous Linux :
+SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+# Sous Windows (MinGW) :
+# SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lopengl32 -lfreetype -lsfml-audio
+
+
+👉 Décommenter la version Windows si vous compilez sous MinGW.
 
 🏁 Conclusion
 
-Ce projet démontre :
+Ce projet illustre :
 
-une maîtrise avancée de la programmation orientée objet en C++,
+une architecture robuste
 
-une application rigoureuse des principes SOLID,
+une maîtrise avancée de la POO
 
-une architecture modulaire, extensible et propre,
+une application rigoureuse de SOLID
 
-un rendu graphique complet grâce à SFML,
+un rendu graphique complet et interactif
 
+un système de test fiable
+
+Il est facilement extensible : grille torique, obstacles, nouveaux patterns, multithreading…
 un système de tests fiable et automatisé.
 
 Le code est entièrement documenté et conçu pour être facilement extensible.
