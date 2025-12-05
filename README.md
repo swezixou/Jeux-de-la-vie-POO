@@ -74,14 +74,15 @@ Clic souris pour modifier la grille :
 
 🖱️ Droite → cellule morte
 
-✔ Contrôles clavier
-Touche	Action
-Espace	Pause / Play
-Entrée	Step-by-step
-→	Accélérer
-←	Ralentir
-M	Mute / Unmute musique
-Échap	Quitter
+| Touche | Action        |
+| ------ | ------------- |
+| Espace | Pause / Play  |
+| Entrée | Step          |
+| →      | Accélérer     |
+| ←      | Ralentir      |
+| M      | Mute / Unmute |
+| Échap  | Quitter       |
+
 🖥️ Mode console
 
 Charge un fichier ou génère une grille aléatoire
