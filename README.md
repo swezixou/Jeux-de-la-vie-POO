@@ -1,4 +1,4 @@
-<img width="1266" height="847" alt="image" src="https://github.com/user-attachments/assets/6dbe77bb-94d7-4543-a027-8dd13f6b6700" /># Jeux-de-la-vie-POO
+# Jeux-de-la-vie-POO
 Projet POO - Jeu de la Vie en C++ (Console + SFML)
 
 🎮 Projet : Jeu de la Vie – Implémentation en C++ orienté objet
