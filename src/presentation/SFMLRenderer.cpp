@@ -20,35 +20,39 @@ SFMLRenderer::SFMLRenderer(int width, int height, float size)
     hudText.setFillColor(sf::Color::White);
     hudText.setPosition(10.f, 10.f);
 
+    // Charger le background UNIQUE
     if (!backgroundTexture.loadFromFile("data/backgrounds/background.png"))
-    {
-        std::cerr << "Erreur chargement background\n";
-    }
-    else
-    {
-        bg1.setTexture(backgroundTexture);
-        bg2.setTexture(backgroundTexture);
+{
+    std::cerr << "Erreur chargement background\n";
+}
+else
+{
+    bg1.setTexture(backgroundTexture);
+    bg2.setTexture(backgroundTexture);
 
-        float scaleX = (width * size) / backgroundTexture.getSize().x;
-        float scaleY = (height * size) / backgroundTexture.getSize().y;
+    float scaleX = (width * size) / backgroundTexture.getSize().x;
+    float scaleY = (height * size) / backgroundTexture.getSize().y;
 
-        bg1.setScale(scaleX, scaleY);
-        bg2.setScale(scaleX, scaleY);
+    bg1.setScale(scaleX, scaleY);
+    bg2.setScale(scaleX, scaleY);
 
-        bg1.setPosition(0, 0);
-        bg2.setPosition(backgroundTexture.getSize().x * scaleX, 0);
-    }
+    bg1.setPosition(0, 0);
+    bg2.setPosition(backgroundTexture.getSize().x * scaleX, 0);
+}
 
+
+    // Charger et lancer la musique
     if (!music.openFromFile("data/audio/mario_theme.mp3"))
-    {
-        std::cerr << "Erreur : impossible de charger la musique.\n";
-    }
-    else
-    {
-        music.setLoop(true);
-        music.setVolume(50);
-        music.play();
-    }
+{
+    std::cerr << "Erreur : impossible de charger la musique.\n";
+}
+else
+{
+    music.setLoop(true);    // répète en boucle
+    music.setVolume(50);    // volume entre 0 et 100
+    music.play();
+}
+
 }
 
 bool SFMLRenderer::isOpen() {
@@ -79,8 +83,10 @@ bool SFMLRenderer::handleEvents() {
 
             if (event.key.code == sf::Keyboard::M)
                 music.setVolume(music.getVolume() == 0 ? 50 : 0);
+
         }
 
+        // Boutons de souris
         if (event.type == sf::Event::MouseButtonPressed) {
             mousePressed = true;
             mouseButton = event.mouseButton.button;
@@ -140,7 +146,7 @@ void SFMLRenderer::drawCells(Grid* grid) {
             if (!grid->getCell(x,y)->isAlive()) {
                 rect.setFillColor(sf::Color::Transparent);
             } else {
-                rect.setFillColor(sf::Color(255, 215, 0));
+                rect.setFillColor(sf::Color(255, 215, 0)); // jaune Mario
             }
 
             window.draw(rect);
@@ -152,14 +158,20 @@ void SFMLRenderer::render(Grid* grid, int iteration) {
 
     window.clear();
 
+    // --- AFFICHAGE DU BACKGROUND ---
     window.draw(bg1);
 
-    bgOffset -= 1.2f;
+    // 
+    // Speed du background (modifie si tu veux)
+bgOffset -= 1.2f; 
 
-    float scaledWidth = backgroundTexture.getSize().x * bg1.getScale().x;
+// largeur finale après scale
+float scaledWidth = backgroundTexture.getSize().x * bg1.getScale().x;
 
-    if (bgOffset <= -scaledWidth)
-        bgOffset
+// Reset quand sortie écran
+if (bgOffset <= -scaledWidth)
+    bgOffset = 0;
+
 bg1.setPosition(bgOffset, 0);
 bg2.setPosition(bgOffset + scaledWidth, 0);
 
@@ -174,4 +186,3 @@ window.draw(bg2);
 
     window.display();
 }
-
