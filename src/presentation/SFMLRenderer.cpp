@@ -160,3 +160,18 @@ void SFMLRenderer::render(Grid* grid, int iteration) {
 
     if (bgOffset <= -scaledWidth)
         bgOffset
+bg1.setPosition(bgOffset, 0);
+bg2.setPosition(bgOffset + scaledWidth, 0);
+
+window.draw(bg1);
+window.draw(bg2);
+
+    // --- GRILLE + CELLULES ---
+    drawCells(grid);
+
+    // --- HUD ---
+    updateHUD(iteration);
+
+    window.display();
+}
+
