@@ -21,25 +21,15 @@ Mode graphique (SFML) : visualisation animée de la grille, HUD, interactions so
 Ce projet a été réalisé dans le cadre de l’UE Programmation Orientée Objet.
 
 🧱 Architecture du projet
-include/
-│── application/   → Game, FileManager
-│── domain/        → Cell, DeadCell, AliveCell, Grid, Rule, ConwayRule
-│── presentation/  → Renderer, ConsoleRenderer, SFMLRenderer
-
-src/
-│── application/
-│── domain/
-│── presentation/
-
-data/
-│── textures/      → images pour le background
-│── audio/         → musique SFML
-│── test_cases/    → fichiers initiaux
-
-testuni/           → tests unitaires
-
-main.cpp
-Makefile
+PROJECT  
+│  
+├── application/       → Moteur du jeu (Game), gestion fichiers (FileManager)  
+├── domain/            → Logique métier : Cell, AliveCell, DeadCell, Rule, Grid  
+├── presentation/      → Rendu console et SFML (ConsoleRenderer, SFMLRenderer)  
+├── src/               → Implémentations .cpp  
+├── include/           → Fichiers .hpp  
+├── data/              → Textures, audio, fichiers initiaux  
+└── testuni/           → Tests unitaires
 
 🧠 Application complète des principes SOLID
 
