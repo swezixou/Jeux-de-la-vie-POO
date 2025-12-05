@@ -68,11 +68,6 @@ Fond animé (scrolling) + pixel art
 
 Musique SFML (activée par défaut)
 
-Clic souris pour modifier la grille :
-
-🖱️ Gauche → cellule vivante
-
-🖱️ Droite → cellule morte
 
 | Touche | Action        |
 | ------ | ------------- |
