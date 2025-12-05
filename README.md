@@ -1,4 +1,4 @@
-# Jeux-de-la-vie-POO
+<img width="1266" height="847" alt="image" src="https://github.com/user-attachments/assets/6dbe77bb-94d7-4543-a027-8dd13f6b6700" /># Jeux-de-la-vie-POO
 Projet POO - Jeu de la Vie en C++ (Console + SFML)
 
 🎮 Projet : Jeu de la Vie – Implémentation en C++ orienté objet
@@ -94,6 +94,7 @@ Exporte chaque génération dans un dossier :
 <nom_fichier>_out/
 
 
+
 Parfait pour les corrections automatiques.
 
 🧪 Tests unitaires
@@ -105,20 +106,25 @@ Les tests comparent :
 
 Commande :
 
-make test
+<img width="647" height="155" alt="{457AF3F4-99D0-4C8E-82D5-1B3BF56BD2C2}" src="https://github.com/user-attachments/assets/b4abebbf-6233-46d4-a1c1-27dea7dffe28" />
+
 
 
 Diff affiché en cas d’erreur ➝ ligne/colonne exacte.
 
 ⚙️ Compilation & Exécution
 🔧 Compiler
-make
+
+<img width="1110" height="246" alt="{671A2624-9AD8-465C-BD7B-AACE459EA149}" src="https://github.com/user-attachments/assets/5db31e91-333c-4c08-acf9-c5c92070c9cf" />
+
 
 ▶️ Lancer
 ./bin/game_of_life
 
 🧹 Nettoyer
-make clean
+
+<img width="628" height="56" alt="{4283F375-5C0B-45A4-89E2-1F75697E3840}" src="https://github.com/user-attachments/assets/cab4f109-16d7-4c49-b4eb-7ffc1ffeea48" />
+
 
 ⚠️ Makefile : Linux & Windows
 
